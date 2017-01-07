@@ -1,9 +1,16 @@
-
-def keywithmaxval(d):
- 
+def keywithmaxval(d): 
     v=list(d.values())
     k=list(d.keys())
-    return k[v.index(max(v))]
+    maxval = max(v)
+    maxCandidate =  k[v.index(maxval)]
+    if  v.count(maxval) == 1 :
+        return [maxCandidate]
+    else :
+        result = [] 
+        for name, votes in d.iteritems():
+            if maxval == votes:
+                result.append(name)
+        return result
 
 def  electionWinner(votes):
     candidates = {}
@@ -12,9 +19,13 @@ def  electionWinner(votes):
             candidates[vote] +=1
         else :
             candidates[vote] = 1
-    ##print max(candidates.iterkeys(), key=lambda k: candidates[k])
-    print keywithmaxval(candidates)
-    print candidates        
+     
+    result = keywithmaxval(candidates)  
+    if len(result) == 1 :
+        return result[0]
+    else :
+        sort(result)
+        return result[-1]       
             
 votes = ["Victor","Victor","Max","Max","Mary"]
 
