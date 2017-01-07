@@ -1,0 +1,44 @@
+LinkedListNode* optimal(LinkedListNode* head) {
+    vector<int> v;
+    //LinkedListNode* current;
+    //LinkedListNode* iter = head;
+    if (head == NULL) return head;
+    /*v.reserve(10000);
+    v.push_back(iter->val);
+    while (iter->next != NULL){
+        current = iter->next;
+        if (std::find(v.begin(), v.end(),current->val)!=v.end()) {
+            iter->next = current->next;
+        } else {
+            v.push_back(current->val);
+        }
+        iter = iter->next;
+    } */
+    
+  LinkedListNode *previous, *current, *dup;
+  previous = head;
+ 
+  
+  while(previous != NULL && previous->next != NULL)
+  {
+     current = previous;
+ 
+     while(current->next != NULL)
+     {
+
+       if(previous->val == current->next->val)
+       {
+ 
+          dup = current->next;
+          current->next = current->next->next;
+          free(dup);
+       }
+       else 
+       {
+          current = current->next;
+       }
+     }
+     previous = previous->next;
+  }
+    return head;
+}
